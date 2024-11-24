@@ -41,6 +41,10 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -55,12 +59,26 @@
 	</dependencyManagement>
 
 	<build>
+      <finalName>catalog-service-config-server</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+            <image>
+                <pullPolicy>IF_NOT_PRESENT</pullPolicy>
+                <!--<runImage>ghcr.io/b1ackshadow/my-custom-builder:latest</runImage>-->
+                <builder>docker.io/paketobuildpacks/builder-jammy-full:latest</builder>
+                <env>
+                    <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+                </env>
+            </image>
+            <docker>
+            </docker>
+        </configuration>
 			</plugin>
 		</plugins>
 	</build>
 
 </project>
+

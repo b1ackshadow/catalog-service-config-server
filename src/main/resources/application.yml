@@ -17,9 +17,18 @@ spring:
     config:
       server:
         git:
-          uri: https://b1ackshadow:${CATALOG_CONFIG_TOKEN}@github.com/b1ackshadow/catalog-service-config.git
+          uri: ${CATALOG_SERVICE_CONFIG_URI}
+          # uri: https://b1ackshadow:${CATALOG_CONFIG_TOKEN}@github.com/b1ackshadow/catalog-service-config.git
           default-label: main
           timeout: 5
           clone-on-start: true
           force-pull: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health"
+    health:
+      show-details: always
+      show-components: always
