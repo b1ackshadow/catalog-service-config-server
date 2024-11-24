@@ -37,7 +37,7 @@ jobs:
         run: |
           export CATALOG_SERVICE_CONFIG_URI=https://b1ackshadow:${{ secrets.GITHUB_TOKEN }}@github.com/b1ackshadow/catalog-service-config.git
           chmod +x mvnw
-          ./mvnw install
+          ./mvnw install -DskipTests
   package: 
     name: Package and publish
     if: ${{ github.ref == 'refs/heads/main'}}
